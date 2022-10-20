@@ -17,6 +17,8 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Roboto:wght@300&family=Yeseva+One&display=swap"
       rel="stylesheet"
     />
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+
     <title>Weather App</title>
   </head>
   <body>
@@ -24,10 +26,10 @@
       <div class="weather-app-wrapper">
         <div class="weather-app">
           <div class="overview">
-      <h1>New York</h1>
+      <h1 id="city"></h1>
       <ul>
-        <li>Friday 05:00</li>
-        <li>Clear</li>
+        <li id="dateTime">Friday 05:00</li>
+        <li id="forecast">Clear</li>
       </ul>
       </div>
       <div class="row">
@@ -35,16 +37,16 @@
           <div class="d-flex weather-temperature">
           <img src="images/partly cloudy.png" alt="clear" class="weather-temperature"/>
           <div class="float-left">
-            <strong>12</strong>
+            <strong id="temp"></strong>
             <span class="units">°C | °F</span>
           </div>
           </div>
         </div>
         <div class="col-6">
           <ul>
-            <li>Precipitation: 0%</li>
-            <li>Humidity: 73%</li>
-            <li>Wind: 2 km/h</li>
+            <li id="precip">Precipitation: 0%</li>
+            <li id="humidity">Humidity: 73%</li>
+            <li id="wind">Wind: 2 km/h</li>
           </ul>
         </div>
       </div>
