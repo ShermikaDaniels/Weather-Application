@@ -43,9 +43,8 @@ function displayTemperature(response) {
   iconElement.setAttribute("alt", response.data.condition.description);
 }
 
-function search(_cityLocation) {
+function search(city) {
   let apiKey = "cea86aeaf9414de0b74t0d5132af8ebo";
-  let city = "New York";
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayTemperature);
 }

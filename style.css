@@ -61,5 +61,10 @@ li::first-letter{
 .weather-temperature .units{
     position: relative;
     font-size: 16px;
-    top: -45px;
+    top: -95px;
+    left: 85px;
+}
+
+#temperature {
+    font-size: 80px;
 }
