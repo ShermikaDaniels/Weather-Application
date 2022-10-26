@@ -26,11 +26,14 @@ function formatDate(timestamp) {
 
 function forecastElement() {
   let forecastElement = document.querySelector("#weekly-forecast");
-  forecastElement.innerHTML = `
-   <div class="row">
-          <div class = "col-2">
+  let forecastHTML = `<div class="row">`;
+  let days = ["Thursday", "Friday", "Saturday", "Sunday", "Monday"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class = "col-2">
             <div class="weather-forecast-date">
-            Thursday
+            ${day}
             </div>
             <img src="images/partly cloudy.png" alt="" width="36" /><br />
             <div class="weather-forecast-temperatures">
@@ -38,14 +41,16 @@ function forecastElement() {
             <span class="weather-forecast-temperature-min">12°</span>
             </div>
           </div>
-        </div>
-  `;
+        </div>`;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
 }
 
 function displayTemperature(response) {
   let temperatureElement = document.querySelector("#temperature");
   let cityElement = document.querySelector("#city");
-  let forecastElement = document.querySelector("#forecast");
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind");
   let dateElement = document.querySelector("#date");
@@ -53,12 +58,12 @@ function displayTemperature(response) {
 
   temperatureElement.innerHTML = Math.round(response.data.temperature.current);
   cityElement.innerHTML = response.data.city;
-  forcastElement.innerHTML = response.data.condition.description;
   humidityElement.innerHTML = response.data.temperature.humidity;
   windElement.innerHTML = Math.round(response.data.wind.speed);
   dateElement.innerHTML = formatDate(response.data.time * 1000);
   iconElement.setAttribute("src", `${response.data.condition.icon_url}`);
   iconElement.setAttribute("alt", response.data.condition.description);
+  forecastElement();
 }
 
 function search(city) {
@@ -74,8 +79,6 @@ function handleSubmit(event) {
 }
 
 search("New York");
-
-displayForecast();
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
