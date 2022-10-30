@@ -24,23 +24,38 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
-function forecastElement(response) {
-  console.log(response.data);
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  return days[day];
+}
+
+function forecastDisplay(response) {
+  let forecast = response.data.daily;
 
   let forecastElement = document.querySelector("#weekly-forecast");
   let forecastHTML = `<div class="row">`;
-  let days = ["Thursday", "Friday", "Saturday", "Sunday", "Monday"];
-  days.forEach(function (day) {
+  forecast.forEach(function (forecastDay) {
     forecastHTML =
       forecastHTML +
       `<div class = "col-2">
             <div class="weather-forecast-date">
-            ${day}
+            ${formatDay.forecastDay.time}
             </div>
             <img src="images/partly cloudy.png" alt="" width="36" /><br />
             <div class="weather-forecast-temperatures">
-            <span class="weather-forecast-temperature-max">18°</span> 
-            <span class="weather-forecast-temperature-min">12°</span>
+            <span class="weather-forecast-temperature-max">${forecastDay.temperature.maximum}</span> 
+            <span class="weather-forecast-temperature-min">${forecastDay.temperature.minimum}</span>
             </div>
           </div>`;
   });
@@ -53,7 +68,7 @@ function getForecast(coordinates) {
   let apiKey = "cea86aeaf9414de0b74t0d5132af8ebo";
   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}&key=${apiKey}&units=metric`;
 
-  axios.get(apiUrl).then(forecastElement);
+  axios.get(apiUrl).then(forecastDisplay);
 }
 
 function displayTemperature(response) {
@@ -71,7 +86,6 @@ function displayTemperature(response) {
   dateElement.innerHTML = formatDate(response.data.time * 1000);
   iconElement.setAttribute("src", `${response.data.condition.icon_url}`);
   iconElement.setAttribute("alt", response.data.condition.description);
-  forecastElement();
 
   getForecast(response.data.coordinates);
 }
