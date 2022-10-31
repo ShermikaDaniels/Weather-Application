@@ -50,15 +50,23 @@ function forecastDisplay(response) {
       forecastHTML +
       `<div class = "col-2">
             <div class="weather-forecast-date">
-            ${formatDay.forecastDay.time}
+            ${formatDay(forecastDay.dt)}
             </div>
             <img src="images/partly cloudy.png" alt="" width="36" /><br />
             <div class="weather-forecast-temperatures">
-            <span class="weather-forecast-temperature-max">${forecastDay.temperature.maximum}</span> 
-            <span class="weather-forecast-temperature-min">${forecastDay.temperature.minimum}</span>
+            <span class="weather-forecast-temperature-max">${
+              forecastDay.temperature.maximum
+            }</span> 
+            <span class="weather-forecast-temperature-min">${
+              forecastDay.temperature.minimum
+            }</span>
             </div>
           </div>`;
   });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
 
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
